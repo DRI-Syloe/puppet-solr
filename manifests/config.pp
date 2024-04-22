@@ -46,7 +46,7 @@ class solr::config {
       ensure  => file,
       owner   => $solr::solr_user,
       group   => $solr::solr_user,
-      content => epp('solr/log4j2.xml.epp',{
+      content => epp('solr/log4j2.xml.epp', {
           log4j_rootlogger_loglevel => $solr::log4j_rootlogger_loglevel,
           log4j_maxfilesize         => $solr::log4j_maxfilesize,
           log4j_maxbackupindex      => $solr::log4j_maxbackupindex,
@@ -59,7 +59,7 @@ class solr::config {
       ensure  => file,
       owner   => $solr::solr_user,
       group   => $solr::solr_user,
-      content => epp('solr/log4j.properties.epp',{
+      content => epp('solr/log4j.properties.epp', {
           log4j_rootlogger_loglevel       => $solr::log4j_rootlogger_loglevel,
           log4j_maxfilesize               => $solr::log4j_maxfilesize,
           log4j_maxbackupindex            => $solr::log4j_maxbackupindex,
@@ -73,7 +73,7 @@ class solr::config {
   # setup default jetty configuration file.
   file { $solr::solr_env:
     ensure  => file,
-    content => epp('solr/solr.in.sh.epp',{
+    content => epp('solr/solr.in.sh.epp', {
         java_home                       => $solr::java_home,
         solr_heap                       => $solr::solr_heap,
         solr_java_mem                   => $solr::solr_java_mem,
@@ -108,7 +108,7 @@ class solr::config {
   if $solr::params::is_systemd {
     include 'systemd'
     systemd::unit_file { 'solr.service':
-      content => epp('solr/solr.service.epp',{
+      content => epp('solr/solr.service.epp', {
           solr_pid_dir => $solr::solr_pid_dir,
           solr_port    => $solr::solr_port,
           solr_bin     => $solr::solr_bin,
@@ -129,7 +129,7 @@ class solr::config {
     file { '/etc/init.d/solr':
       ensure  => file,
       mode    => '0755',
-      content => epp('solr/solr.sh.epp',{
+      content => epp('solr/solr.sh.epp', {
           solr_bin  => $solr::solr_bin,
           solr_user => $solr::solr_user,
           solr_env  => $solr::solr_env,
